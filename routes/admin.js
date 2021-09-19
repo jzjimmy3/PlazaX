@@ -9,8 +9,13 @@ const router = express.Router();
 const products = [];
 
 router.get('/add-product', (req, res, next) => {
-  console.log('In another middleware');
-  res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
+  //render variable you want to add in the add-product.pug filr
+  res.render('add-product', {
+    prods: products,
+    pageTitle: 'Add Product',
+    path: '/admin/add-product',
+  });
+  // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 router.post('/add-product', (req, res, next) => {
