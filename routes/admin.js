@@ -1,31 +1,15 @@
 const express = require('express');
 
-const path = require('path');
+// const path = require('path');
 
-const rootDir = require('../util/path');
+// const rootDir = require('../util/path');
 
 const router = express.Router();
 
-const products = [];
+const productsController = require('../controllers/products');
 
-router.get('/add-product', (req, res, next) => {
-  //render variable you want to add in the add-product.pug filr
-  res.render('add-product', {
-    prods: products,
-    pageTitle: 'Add Product',
-    path: '/admin/add-product',
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true,
-  });
-  // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-});
+router.get('/add-product', productsController.getAddProduct);
 
-router.post('/add-product', (req, res, next) => {
-  products.push({ title: req.body.title });
-  console.log(req.body);
-  res.redirect('/');
-});
+router.post('/add-product', productsController.postAddProduct);
 
-exports.routes = router;
-exports.products = products;
+module.exports = router;
