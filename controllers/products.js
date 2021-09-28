@@ -17,15 +17,16 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  const products = Product.fetchAll();
-  res.render('shop', {
-    prods: products,
-    pageTitle: 'Shop',
-    path: '/',
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true,
+  Product.fetchAll((products) => {
+    res.render('shop', {
+      prods: products,
+      pageTitle: 'Shop',
+      path: '/',
+      hasProducts: products.length > 0,
+      activeShop: true,
+      productCSS: true,
+    });
   });
   // console.log(adminData.products);
-  res.sendFile(path.join(rootDir, 'views', 'shop.html'));
+  // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
 };
